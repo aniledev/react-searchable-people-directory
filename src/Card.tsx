@@ -1,7 +1,7 @@
 import React from "react";
 import EditableText from "./Text";
+import { CardComponentProps } from './types';
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { phone } from "phone";
 
 const Text = styled.div`
@@ -26,10 +26,9 @@ const StyledImage = styled.img`
   border-radius: 50%;
 `;
 
-const Card = ({
+const Card: React.FC<CardComponentProps> = ({
   key,
   className,
-  updateUserField,
   user: {
     cell,
     location: { city, state, country },
@@ -38,7 +37,8 @@ const Card = ({
     picture: { large },
     nat,
     login: { uuid }
-  }
+  },
+  updateUserField,
 }) => {
   const renderLocation = () => {
     return country === "United States" ? (
@@ -85,7 +85,7 @@ const Card = ({
   };
 
   const renderPhone = () => {
-    const countryCode = nat ? nat : null;
+    const countryCode = nat ? nat : undefined;
     const formattedNum = phone(cell, { country: countryCode }).phoneNumber;
     return formattedNum ? formattedNum : cell;
   };
@@ -129,12 +129,6 @@ const Card = ({
       </GrayText>
     </div>
   );
-};
-
-Card.propTypes = {
-  className: PropTypes.string,
-  user: PropTypes.object,
-  updateUserField: PropTypes.func
 };
 
 export default Card;

@@ -34,29 +34,29 @@ export interface MainComponentProps {
 };
 
 export interface TextComponentProps {
-  id: string;
-  name: string;
-  type: string;
+  id: number;
+  name?: string;
+  type?: string;
   value: string;
   editClassName: string;
   field: string;
-  isEditActive: boolean;
+  isEditActive?: boolean;
   key: string;
-  backup: string;
-  updateUserField: (id: string, field: string, value: string) => void;
+  backup?: string;
+  updateUserField: (id: number, field: string, value: string) => void;
 };
 
 export interface EditableTextState {
-  id: string;
-  name: string;
-  type: string;
+  id: number;
+  name?: string;
+  type?: string;
   value: string;
   editClassName: string;
   field: string;
-  isEditActive: boolean;
+  isEditActive?: boolean;
   key: string;
   backup: string;
-  updateUserField: (id: string, field: string, value: string) => void;
+  updateUserField: (id: number, field: string, value: string) => void;
 };
 
 export type ReadonlyTextComponentProps = Readonly<TextComponentProps>;

@@ -6,7 +6,7 @@ class EditableText extends React.Component<ReadonlyTextComponentProps, EditableT
   constructor(props: ReadonlyTextComponentProps) {
     super(props);
     this.state = {
-      id: props.id || "",
+      id: props.id,
       name: props.name,
       type: props.type || "text",
       value: props.value || "",
