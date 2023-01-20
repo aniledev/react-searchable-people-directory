@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import MainContent from "./MainContent";
+import { User } from './types';
 import styled from "styled-components";
 import "./styles.css";
-import { fetchList } from "../src/services";
+import { fetchList } from "./services";
 import { phone } from "phone";
 
 const StyledMain = styled(MainContent)`
@@ -27,7 +28,7 @@ const StyledInput = styled.input`
 
 const App = () => {
   // Hooks state management
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [input, setInput] = useState("");
 
   // Use effect to fetch the list of users from the api
@@ -39,16 +40,17 @@ const App = () => {
       }
     });
     // Clean up side effects
-    return () => (mounted = false);
+    return () => {mounted = false};
   }, []);
 
   // on change of the field we need to update the state
-  const handleInput = (event) => {
+  const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
     setInput(event.target.value);
   };
 
-  const updateUserField = (id, field, value) => {
-    const foundUser = users.filter(({ login: { uuid } }) => uuid === id)[0];
+  const updateUserField = (id: number, field: string, value: string): void => {
+    const foundUser = users.filter(({ login: { uuid } }) => uuid === id)[0] as User;
+
     const isLocationField =
       field === "city" || field === "state" || field === "country";
 
@@ -73,7 +75,7 @@ const App = () => {
       foundUser[field] = value;
     }
 
-    const updatedUsers = users.map((user) => {
+    const updatedUsers = users.map((user: User) => {
       if (user.login.uuid === id) {
         return foundUser;
       }
@@ -96,6 +98,7 @@ const App = () => {
         users={users}
         input={input}
         updateUserField={updateUserField}
+        className="main-content"
       />
     </div>
   );

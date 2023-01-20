@@ -1,8 +1,9 @@
 import React from "react";
+import { ReadonlyTextComponentProps, EditableTextState} from "./types";
 
 // Created class fucntion in one of the components to demonstrate familiarity with class and functional components
-class EditableText extends React.Component {
-  constructor(props) {
+class EditableText extends React.Component<ReadonlyTextComponentProps, EditableTextState> {
+  constructor(props: ReadonlyTextComponentProps) {
     super(props);
     this.state = {
       id: props.id || "",
@@ -11,20 +12,22 @@ class EditableText extends React.Component {
       value: props.value || "",
       editClassName: props.editClassName,
       field: props.field || "",
-      edit: false,
-      key: props.key
+      isEditActive: false,
+      key: props.key,
+      backup: props.value || "",
+      updateUserField: props.updateUserField
     };
   }
 
   edit() {
-    this.setState({ edit: this.state.edit !== false });
+    this.setState({ isEditActive: this.state.isEditActive !== false });
   }
 
   // we only need to update the state when the enter happens
   // pass in the id, the value, and the field to the function to update the state
   render() {
     return (
-      (this.state.edit === true && (
+      (this.state.isEditActive === true && (
         <input
           key={this.state.key}
           name={this.state.name}
@@ -41,16 +44,16 @@ class EditableText extends React.Component {
           onChange={(event) => {
             this.setState({ value: event.target.value });
           }}
-          onBlur={(event) => {
-            this.setState({ edit: false, value: this.state.backup });
+          onBlur={() => {
+            this.setState({ isEditActive: false, value: this.state.backup });
           }}
-          onKeyUp={(event) => {
+          onKeyUp={(event: React.KeyboardEvent<HTMLInputElement>) => {
             if (event.key === "Escape") {
-              this.setState({ edit: false, value: this.state.backup });
+              this.setState({ isEditActive: false, value: this.state.backup });
             }
             if (event.key === "Enter") {
-              if (event.target.value) {
-                this.setState({ edit: false, value: this.state.value });
+              if (event.currentTarget.value) {
+                this.setState({ isEditActive: false, value: this.state.value });
                 this.props.updateUserField(
                   this.state.id,
                   this.state.field,
@@ -58,7 +61,7 @@ class EditableText extends React.Component {
                 );
                 return;
               }
-              this.setState({ edit: false, value: this.state.backup });
+              this.setState({ isEditActive: false, value: this.state.backup });
               this.props.updateUserField(
                 this.state.id,
                 this.state.field,
@@ -69,8 +72,8 @@ class EditableText extends React.Component {
         />
       )) || (
         <span
-          onClick={(event) => {
-            this.setState({ edit: this.state.edit !== true });
+          onClick={() => {
+            this.setState({ isEditActive: this.state.isEditActive !== true });
           }}
         >
           {this.state.value}

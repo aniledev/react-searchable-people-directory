@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card";
+import { User, MainComponentProps } from './types';
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 
 const StyledCard = styled(Card)`
@@ -16,26 +16,26 @@ const StyledCard = styled(Card)`
   border-radius: 5%;
 `;
 
-const MainContent = ({ className, users, input, updateUserField }) => {
+const MainContent: React.FC<MainComponentProps> = ({ className, users, input, updateUserField }) => {
   // This could be replaced by doing some fancy object nesting checks, but just for simplicity and sake of time, this will do for now
-  const byConditions = (value) => {
-    const lowerCase = (value) => {
-      return value.toLowerCase();
+  const byConditions = (obj: User) => {
+    const lowerCase = (string: string): string => {
+      return string.toLowerCase();
     };
 
-    const matches = (value) => {
+    const matches = (string: string): boolean => {
       const formattedInput = input.toLowerCase();
-      return value.includes(formattedInput);
+      return string.includes(formattedInput);
     };
 
-    const matchesFirst = matches(lowerCase(value.name?.first));
-    const matchesLast = matches(lowerCase(value.name?.last));
-    const matchesCity = matches(lowerCase(value.location?.city));
-    const matchesCountry = matches(lowerCase(value.location?.country));
-    const matchesState = matches(lowerCase(value.location?.state));
-    const matchesEmail = matches(lowerCase(value.email));
+    const matchesFirst = matches(lowerCase(obj.name?.first));
+    const matchesLast = matches(lowerCase(obj.name?.last));
+    const matchesCity = matches(lowerCase(obj.location?.city));
+    const matchesCountry = matches(lowerCase(obj.location?.country));
+    const matchesState = matches(lowerCase(obj.location?.state));
+    const matchesEmail = matches(lowerCase(obj.email));
     const matchesNum = matches(
-      lowerCase(value.cell.replace(/[^a-z0-9]/gi, ""))
+      lowerCase(obj.cell.replace(/[^a-z0-9]/gi, ""))
     );
 
     return (
@@ -56,8 +56,9 @@ const MainContent = ({ className, users, input, updateUserField }) => {
 
   // Generate the list of cards
   const CardList = () => {
-    return filterUsers().map((user) => (
+    return filterUsers().map((user: User) => (
       <StyledCard
+        className="styled-card"
         key={uuidv4()}
         user={user}
         updateUserField={updateUserField}
@@ -67,16 +68,9 @@ const MainContent = ({ className, users, input, updateUserField }) => {
 
   return (
     <div className={className}>
-      <CardList />
+      {CardList()}
     </div>
   );
-};
-
-MainContent.propTypes = {
-  className: PropTypes.string,
-  users: PropTypes.array,
-  input: PropTypes.string,
-  updateUserField: PropTypes.func
 };
 
 export default MainContent;
