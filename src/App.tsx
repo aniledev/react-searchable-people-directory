@@ -1,7 +1,7 @@
 import {useState, useEffect, type ChangeEvent } from 'react';
-import styled from "styled-components";
-import MainContent from "./MainContent";
-import { User } from './types';
+import styled from 'styled-components';
+import MainContent from './MainContent';
+import {User} from './types';
 import './styles.css';
 import {fetchList} from './services';
 import {phone} from 'phone';
@@ -41,8 +41,8 @@ const App = () => {
 		});
 		// Clean up side effects
 		return () => {
-mounted = false
-};
+			mounted = false;
+		};
 	}, []);
 
 	// On change of the field we need to update the state
@@ -51,11 +51,14 @@ mounted = false
 	};
 
 	const updateUserField = (id: number, field: string, value: string): void => {
-		const foundUser = users.find(({ login: { uuid } }) => uuid === id) ;
-
 		const isLocationField
       = field === 'city' || field === 'state' || field === 'country';
+		const foundUser = users.find(({login: {uuid}}) => uuid === id);
 
+    if (!foundUser) {
+      return;
+    }
+    
 		if (isLocationField) {
 			foundUser.location[field] = value;
 		}
@@ -67,8 +70,8 @@ mounted = false
 		}
 
 		if (field === 'cell') {
-			const formattedNumber = phone(value, { country: foundUser.nat }).phoneNumber;
-      foundUser[field] = formattedNumber ? formattedNumber : value;
+			const formattedNumber = phone(value, {country: foundUser.nat}).phoneNumber;
+			foundUser[field] = formattedNumber ? formattedNumber : value;
 		}
 
 		// A package could be used here to validate the email and to provide a type of validation message
@@ -95,7 +98,9 @@ mounted = false
 				id='search'
 				name='search'
 				value={input}
-				onChange={event => { handleInput(event); }}
+				onChange={event => {
+          handleInput(event); 
+        }}
 			/>
 			<StyledMain
 				users={users}
