@@ -1,10 +1,10 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import {useState, useEffect, type ChangeEvent } from 'react';
+import styled from "styled-components";
 import MainContent from "./MainContent";
 import { User } from './types';
-import styled from "styled-components";
-import "./styles.css";
-import { fetchList } from "./services";
-import { phone } from "phone";
+import './styles.css';
+import {fetchList} from './services';
+import {phone} from 'phone';
 
 const StyledMain = styled(MainContent)`
   display: flex;
@@ -27,81 +27,84 @@ const StyledInput = styled.input`
 `;
 
 const App = () => {
-  // Hooks state management
-  const [users, setUsers] = useState<User[]>([]);
-  const [input, setInput] = useState("");
+	// Hooks state management
+	const [users, setUsers] = useState<User[]>([]);
+	const [input, setInput] = useState('');
 
-  // Use effect to fetch the list of users from the api
-  useEffect(() => {
-    let mounted = true;
-    fetchList().then((data) => {
-      if (mounted) {
-        setUsers(data.results);
-      }
-    });
-    // Clean up side effects
-    return () => {mounted = false};
-  }, []);
+	// Use effect to fetch the list of users from the api
+	useEffect(() => {
+		let mounted = true;
+		fetchList().then(data => {
+			if (mounted) {
+				setUsers(data.results);
+			}
+		});
+		// Clean up side effects
+		return () => {
+mounted = false
+};
+	}, []);
 
-  // on change of the field we need to update the state
-  const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-    setInput(event.target.value);
-  };
+	// On change of the field we need to update the state
+	const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
+		setInput(event.target.value);
+	};
 
-  const updateUserField = (id: number, field: string, value: string): void => {
-    const foundUser = users.filter(({ login: { uuid } }) => uuid === id)[0] as User;
+	const updateUserField = (id: number, field: string, value: string): void => {
+		const foundUser = users.find(({ login: { uuid } }) => uuid === id) ;
 
-    const isLocationField =
-      field === "city" || field === "state" || field === "country";
+		const isLocationField
+      = field === 'city' || field === 'state' || field === 'country';
 
-    if (isLocationField) {
-      foundUser["location"][field] = value;
-    }
+		if (isLocationField) {
+			foundUser.location[field] = value;
+		}
 
-    if (field === "name") {
-      const [updatedFirst, ...rest] = value.split(" ");
-      foundUser[field]["first"] = updatedFirst;
-      foundUser[field]["last"] = rest.join(" ");
-    }
+		if (field === 'name') {
+			const [updatedFirst, ...rest] = value.split(' ');
+			foundUser[field].first = updatedFirst;
+			foundUser[field].last = rest.join(' ');
+		}
 
-    if (field === "cell") {
-      const formattedNum = phone(value, { country: foundUser.nat }).phoneNumber;
-      foundUser[field] = formattedNum ? formattedNum : value;
-    }
+		if (field === 'cell') {
+			const formattedNumber = phone(value, { country: foundUser.nat }).phoneNumber;
+      foundUser[field] = formattedNumber ? formattedNumber : value;
+		}
 
-    // A package could be used here to validate the email and to provide a type of validation message
-    // but for the sake of thi project, I kept it simple
-    if (field === "email") {
-      foundUser[field] = value;
-    }
+		// A package could be used here to validate the email and to provide a type of validation message
+		// but for the sake of thi project, I kept it simple
+		if (field === 'email') {
+			foundUser[field] = value;
+		}
 
-    const updatedUsers = users.map((user: User) => {
-      if (user.login.uuid === id) {
-        return foundUser;
-      }
-      return user;
-    });
+		const updatedUsers = users.map((user: User) => {
+			if (user.login.uuid === id) {
+				return foundUser;
+			}
 
-    setUsers(updatedUsers);
-  };
+			return user;
+		});
 
-  return (
-    <div className="App">
-      <StyledInput
-        type="text"
-        id="search"
-        name="search"
-        value={input}
-        onChange={(event) => handleInput(event)}
-      />
-      <StyledMain
-        users={users}
-        input={input}
-        updateUserField={updateUserField}
-        className="main-content"
-      />
-    </div>
-  );
+		setUsers(updatedUsers);
+	};
+
+	return (
+		<div className='App'>
+			<StyledInput
+				type='text'
+				id='search'
+				name='search'
+				value={input}
+				onChange={event => { handleInput(event); }}
+			/>
+			<StyledMain
+				users={users}
+				input={input}
+				updateUserField={updateUserField}
+				className='main-content'
+			/>
+		</div>
+	);
 };
 
 export default App;
