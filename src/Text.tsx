@@ -1,5 +1,5 @@
 import React from 'react';
-import {type ReadonlyTextComponentProps, type EditableTextState} from './types';
+import {ReadonlyTextComponentProps, EditableTextState} from './types';
 
 // Created class fucntion in one of the components to demonstrate familiarity with class and functional components
 class EditableText extends React.Component<ReadonlyTextComponentProps, EditableTextState> {
