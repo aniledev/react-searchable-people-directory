@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {v4 as uuidv4} from 'uuid';
 import Card from './Card';
-import {type User, type MainComponentProps} from './types';
+import {User, MainComponentProps} from './types';
 
 const StyledCard = styled(Card)`
   display: flex;

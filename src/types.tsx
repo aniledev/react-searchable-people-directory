@@ -5,7 +5,8 @@ export type User = {
 	location: {
 		city: string;
 		state: string;
-		country: string;
+    country: string;
+    [key: string]: string;
 	};
 	name: {
 		first: string;

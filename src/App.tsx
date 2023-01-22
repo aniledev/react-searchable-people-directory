@@ -1,4 +1,4 @@
-import {useState, useEffect, type ChangeEvent } from 'react';
+import {useState, useEffect, ChangeEvent} from 'react';
 import styled from 'styled-components';
 import MainContent from './MainContent';
 import {User} from './types';
@@ -55,10 +55,10 @@ const App = () => {
       = field === 'city' || field === 'state' || field === 'country';
 		const foundUser = users.find(({login: {uuid}}) => uuid === id);
 
-    if (!foundUser) {
-      return;
-    }
-    
+		if (!foundUser) {
+			return;
+		}
+
 		if (isLocationField) {
 			foundUser.location[field] = value;
 		}
@@ -99,8 +99,8 @@ const App = () => {
 				name='search'
 				value={input}
 				onChange={event => {
-          handleInput(event); 
-        }}
+					handleInput(event);
+				}}
 			/>
 			<StyledMain
 				users={users}

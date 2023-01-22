@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {phone} from 'phone';
 import EditableText from './Text';
-import {type CardComponentProps} from './types';
+import {CardComponentProps} from './types';
 
 const Text = styled.div`
   font-size: 0.9rem;
