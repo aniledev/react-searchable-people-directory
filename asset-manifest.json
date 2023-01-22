@@ -1,20 +1,13 @@
 {
   "files": {
-    "main.css": "/react-searchable-people-directory/static/css/main.bed9c162.chunk.css",
-    "main.js": "/react-searchable-people-directory/static/js/main.b62ef799.chunk.js",
-    "main.js.map": "/react-searchable-people-directory/static/js/main.b62ef799.chunk.js.map",
-    "runtime-main.js": "/react-searchable-people-directory/static/js/runtime-main.91f3a020.js",
-    "runtime-main.js.map": "/react-searchable-people-directory/static/js/runtime-main.91f3a020.js.map",
-    "static/js/2.ac95f3c5.chunk.js": "/react-searchable-people-directory/static/js/2.ac95f3c5.chunk.js",
-    "static/js/2.ac95f3c5.chunk.js.map": "/react-searchable-people-directory/static/js/2.ac95f3c5.chunk.js.map",
+    "main.css": "/react-searchable-people-directory/static/css/main.2bcbd4a9.css",
+    "main.js": "/react-searchable-people-directory/static/js/main.f28d9949.js",
     "index.html": "/react-searchable-people-directory/index.html",
-    "static/css/main.bed9c162.chunk.css.map": "/react-searchable-people-directory/static/css/main.bed9c162.chunk.css.map",
-    "static/js/2.ac95f3c5.chunk.js.LICENSE.txt": "/react-searchable-people-directory/static/js/2.ac95f3c5.chunk.js.LICENSE.txt"
+    "main.2bcbd4a9.css.map": "/react-searchable-people-directory/static/css/main.2bcbd4a9.css.map",
+    "main.f28d9949.js.map": "/react-searchable-people-directory/static/js/main.f28d9949.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.91f3a020.js",
-    "static/js/2.ac95f3c5.chunk.js",
-    "static/css/main.bed9c162.chunk.css",
-    "static/js/main.b62ef799.chunk.js"
+    "static/css/main.2bcbd4a9.css",
+    "static/js/main.f28d9949.js"
   ]
 }
