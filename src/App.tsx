@@ -1,7 +1,8 @@
-import {useState, useEffect, ChangeEvent} from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import MainContent from './MainContent';
 import {User} from './types';
+import { useFormInput } from "./use-form-input";
 import './styles.css';
 import {fetchList} from './services';
 import {phone} from 'phone';
@@ -29,7 +30,7 @@ const StyledInput = styled.input`
 const App = () => {
 	// Hooks state management
 	const [users, setUsers] = useState<User[]>([]);
-	const [input, setInput] = useState('');
+  const { value: input, onChange: handleInputChange } = useFormInput("");
 
 	// Use effect to fetch the list of users from the api
 	useEffect(() => {
@@ -44,11 +45,6 @@ const App = () => {
 			mounted = false;
 		};
 	}, []);
-
-	// On change of the field we need to update the state
-	const handleInput = (event: ChangeEvent<HTMLInputElement>): void => {
-		setInput(event.target.value);
-	};
 
 	const updateUserField = (id: number, field: string, value: string): void => {
 		const isLocationField
@@ -99,7 +95,7 @@ const App = () => {
 				name='search'
 				value={input}
 				onChange={event => {
-					handleInput(event);
+					handleInputChange(event);
 				}}
 			/>
 			<StyledMain
