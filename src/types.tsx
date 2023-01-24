@@ -3,10 +3,10 @@ export type User = {
 		uuid: number;
 	};
 	location: {
+		[key: string]: string;
 		city: string;
 		state: string;
-    country: string;
-    [key: string]: string;
+		country: string;
 	};
 	name: {
 		first: string;
