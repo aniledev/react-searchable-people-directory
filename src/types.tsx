@@ -13,28 +13,28 @@ export type User = {
 		last: string;
 	};
 	picture: {
-		large: any;
+		large: string;
 	};
 	cell: string;
 	email: string;
 	nat: string;
 };
 
-export type CardComponentProps = {
+export type CardComponentProperties = {
 	key: string;
 	className: string;
 	user: User;
 	updateUserField: (id: number, field: string, value: string) => void;
 };
 
-export type MainComponentProps = {
+export type MainComponentProperties = {
 	className: string;
 	users: User[];
 	input: string;
 	updateUserField: (id: number, field: string, value: string) => void;
 };
 
-export type TextComponentProps = {
+export type TextComponentProperties = {
 	id: number;
 	name?: string;
 	type?: string;
@@ -60,4 +60,4 @@ export type EditableTextState = {
 	updateUserField: (id: number, field: string, value: string) => void;
 };
 
-export type ReadonlyTextComponentProps = Readonly<TextComponentProps>;
+export type ReadonlyTextComponentProperties = Readonly<TextComponentProperties>;

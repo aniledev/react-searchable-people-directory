@@ -1,14 +1,15 @@
+/* eslint-disable unicorn/filename-case */
 import React from 'react';
-import {ReadonlyTextComponentProps, EditableTextState} from './types';
+import type {ReadonlyTextComponentProperties, EditableTextState} from './types';
 
 // Created class fucntion in one of the components to demonstrate familiarity with class and functional components
-class EditableText extends React.Component<ReadonlyTextComponentProps, EditableTextState> {
-	constructor(props: ReadonlyTextComponentProps) {
+class EditableText extends React.Component<ReadonlyTextComponentProperties, EditableTextState> {
+	constructor(props: ReadonlyTextComponentProperties) {
 		super(props);
 		this.state = {
 			id: props.id,
 			name: props.name,
-			type: props.type || 'text',
+			type: props.type ?? 'text',
 			value: props.value || '',
 			editClassName: props.editClassName,
 			field: props.field || '',
