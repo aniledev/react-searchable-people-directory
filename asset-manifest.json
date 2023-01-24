@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-searchable-people-directory/static/css/main.2bcbd4a9.css",
-    "main.js": "/react-searchable-people-directory/static/js/main.f28d9949.js",
+    "main.js": "/react-searchable-people-directory/static/js/main.fc058cd5.js",
     "index.html": "/react-searchable-people-directory/index.html",
     "main.2bcbd4a9.css.map": "/react-searchable-people-directory/static/css/main.2bcbd4a9.css.map",
-    "main.f28d9949.js.map": "/react-searchable-people-directory/static/js/main.f28d9949.js.map"
+    "main.fc058cd5.js.map": "/react-searchable-people-directory/static/js/main.fc058cd5.js.map"
   },
   "entrypoints": [
     "static/css/main.2bcbd4a9.css",
-    "static/js/main.f28d9949.js"
+    "static/js/main.fc058cd5.js"
   ]
 }
